@@ -43,15 +43,31 @@ class CredisKeyValueStoreIntegrationTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function itShouldSetAndGetMultipleValues()
 	{
-		$keys = ['key1', 'key2'];
-		$values = ['foo', 'bar'];
-		$items = array_combine($keys, $values);
+		$items = ['key1' => 'foo', 'key2' => 'bar'];
+		$keys = array_keys($items);
 
 		$this->keyValueStore->multiSet($items);
 		$result = $this->keyValueStore->multiGet($keys);
 
-		$this->assertSame($values, $result);
+		$this->assertSame($items, $result);
 	}
+
+	/**
+	 * @test
+	 */
+	public function itShouldExcludeMissingValuesFromResultArray()
+	{
+		$items = ['key1' => 'foo', 'key2' => 'bar'];
+		$keys = array_keys($items);
+
+		$this->keyValueStore->multiSet($items);
+
+		array_push($keys, 'key3');
+		$result = $this->keyValueStore->multiGet($keys);
+
+		$this->assertSame($items, $result);
+	}
+
 
 	/**
 	 * @test

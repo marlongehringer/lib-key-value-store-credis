@@ -57,7 +57,10 @@ class CredisKeyValueStore implements KeyValueStore
 	 */
 	public function multiGet(array $keys)
 	{
-		return $this->client->mGet($keys);
+		$values = $this->client->mGet($keys);
+        $items = array_combine($keys, $values);
+
+        return array_filter($items);
 	}
 
 	/**
