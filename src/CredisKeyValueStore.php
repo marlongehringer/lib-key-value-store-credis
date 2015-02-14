@@ -1,9 +1,9 @@
 <?php
 
-namespace Brera\KeyValue\Credis;
+namespace Brera\DaraPool\KeyValue\Credis;
 
-use Brera\KeyValue\KeyNotFoundException;
-use Brera\KeyValue\KeyValueStore;
+use Brera\DaraPool\KeyValue\KeyNotFoundException;
+use Brera\DaraPool\KeyValue\KeyValueStore;
 use Credis_Client;
 
 class CredisKeyValueStore implements KeyValueStore

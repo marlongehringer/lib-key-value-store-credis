@@ -1,6 +1,6 @@
 <?php
 
-namespace Brera\KeyValue\Credis;
+namespace Brera\DaraPool\KeyValue\Credis;
 
 class CredisKeyValueStoreIntegrationTest extends \PHPUnit_Framework_TestCase
 {
