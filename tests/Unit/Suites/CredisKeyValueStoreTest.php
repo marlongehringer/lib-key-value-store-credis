@@ -77,9 +77,8 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function itShouldSetAndGetMultipleKeys()
 	{
-		$keys = ['key1', 'key2'];
-		$values = ['foo', 'bar'];
-		$items = array_combine($keys, $values);
+        $items = ['key1' => 'foo', 'key2' => 'bar'];
+        $keys = array_keys($items);
 
 		$this->stubClient->expects($this->once())
 		                 ->method('mSet');
@@ -88,10 +87,10 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
 		$this->stubClient->expects($this->once())
 		                 ->method('mGet')
-		                 ->willReturn($values);
+		                 ->willReturn($items);
 
 		$result = $this->store->multiGet($keys);
 
-		$this->assertSame($values, $result);
+		$this->assertSame($items, $result);
 	}
 }
