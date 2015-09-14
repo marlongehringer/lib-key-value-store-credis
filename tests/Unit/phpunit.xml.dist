@@ -22,7 +22,7 @@
         timeoutForLargeTests="60"
         strict="true"
         verbose="false">
-    <testsuite name="Brera Key/Value Store Library For CRedis Unit Tests">
+    <testsuite name="Lizards And Pumpkins Key/Value Store Library For CRedis Unit Tests">
         <directory>.</directory>
     </testsuite>
     <filter>

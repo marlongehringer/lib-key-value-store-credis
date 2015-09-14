@@ -1,6 +1,6 @@
 <?php
 
-namespace Brera\DaraPool\KeyValue\Credis;
+namespace LizardsAndPumpkins\DataPool\KeyValue\Credis;
 
 class CredisKeyValueStoreIntegrationTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,10 +27,7 @@ class CredisKeyValueStoreIntegrationTest extends \PHPUnit_Framework_TestCase
 		$this->keyValueStore = new CredisKeyValueStore($client);
 	}
 
-	/**
-	 * @test
-	 */
-	public function itShouldSetAndGetAValue()
+	public function testValueIsSetAndRetrieved()
 	{
 		$this->keyValueStore->set('foo', 'bar');
 		$result = $this->keyValueStore->get('foo');
@@ -38,10 +35,7 @@ class CredisKeyValueStoreIntegrationTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('bar', $result);
 	}
 
-	/**
-	 * @test
-	 */
-	public function itShouldSetAndGetMultipleValues()
+	public function testMultipleValuesAreSetAndRetrieved()
 	{
 		$items = ['key1' => 'foo', 'key2' => 'bar'];
 		$keys = array_keys($items);
@@ -52,10 +46,7 @@ class CredisKeyValueStoreIntegrationTest extends \PHPUnit_Framework_TestCase
 		$this->assertSame($items, $result);
 	}
 
-	/**
-	 * @test
-	 */
-	public function itShouldExcludeMissingValuesFromResultArray()
+	public function testMissingValuesAreExcludedFromResultArray()
 	{
 		$items = ['key1' => 'foo', 'key2' => 'bar'];
 		$keys = array_keys($items);
@@ -69,10 +60,7 @@ class CredisKeyValueStoreIntegrationTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * @test
-	 */
-	public function itShouldReturnFalseItKeyDoesNotExist()
+	public function testFalseIsReturnedIfKeyDoesNotExist()
 	{
 		$this->assertFalse($this->keyValueStore->has('foo'));
 	}

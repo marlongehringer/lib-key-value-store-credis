@@ -1,9 +1,9 @@
 <?php
 
-namespace Brera\DaraPool\KeyValue\Credis;
+namespace LizardsAndPumpkins\DataPool\KeyValue\Credis;
 
-use Brera\DaraPool\KeyValue\KeyNotFoundException;
-use Brera\DaraPool\KeyValue\KeyValueStore;
+use LizardsAndPumpkins\DataPool\KeyValue\KeyNotFoundException;
+use LizardsAndPumpkins\DataPool\KeyValue\KeyValueStore;
 use Credis_Client;
 
 class CredisKeyValueStore implements KeyValueStore
@@ -21,7 +21,6 @@ class CredisKeyValueStore implements KeyValueStore
 	/**
      * @param string $key
      * @return bool|string
-     * @throws KeyNotFoundException
      */
     public function get($key)
     {
@@ -35,7 +34,6 @@ class CredisKeyValueStore implements KeyValueStore
     /**
      * @param string $key
      * @param mixed $value
-     * @return null
      */
     public function set($key, $value)
     {
@@ -65,7 +63,6 @@ class CredisKeyValueStore implements KeyValueStore
 
 	/**
 	 * @param array $items
-	 * @return null
 	 */
 	public function multiSet(array $items)
 	{
