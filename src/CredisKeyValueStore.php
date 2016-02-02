@@ -33,7 +33,7 @@ class CredisKeyValueStore implements KeyValueStore
 
     /**
      * @param string $key
-     * @param mixed $value
+     * @param string $value
      */
     public function set($key, $value)
     {
@@ -51,7 +51,7 @@ class CredisKeyValueStore implements KeyValueStore
 
     /**
      * @param string[] $keys
-     * @return mixed[]
+     * @return string[]
      */
     public function multiGet(array $keys)
     {
@@ -66,7 +66,7 @@ class CredisKeyValueStore implements KeyValueStore
     }
 
     /**
-     * @param mixed[] $items
+     * @param string[] $items
      */
     public function multiSet(array $items)
     {
