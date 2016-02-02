@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.3/phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/5.1/phpunit.xsd"
         backupGlobals="false"
         backupStaticAttributes="false"
         cacheTokens="false"
@@ -16,11 +16,14 @@
         stopOnError="false"
         stopOnFailure="false"
         stopOnIncomplete="false"
+        stopOnRisky="false"
         stopOnSkipped="false"
         timeoutForSmallTests="1"
         timeoutForMediumTests="10"
         timeoutForLargeTests="60"
-        strict="true"
+        checkForUnintentionallyCoveredCode="true"
+        beStrictAboutTestsThatDoNotTestAnything="true"
+        beStrictAboutOutputDuringTests="true"
         verbose="false">
     <testsuite name="Lizards And Pumpkins Key/Value Store Library For CRedis Integration Tests">
         <directory>.</directory>
