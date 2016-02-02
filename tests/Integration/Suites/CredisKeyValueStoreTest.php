@@ -2,7 +2,7 @@
 
 namespace LizardsAndPumpkins\DataPool\KeyValue\Credis;
 
-class CredisKeyValueStoreIntegrationTest extends \PHPUnit_Framework_TestCase
+class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {
     const REDIS_HOST = 'localhost';
 
