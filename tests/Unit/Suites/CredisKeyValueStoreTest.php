@@ -15,16 +15,16 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
      */
     private $store;
 
-	/**
-	 * @var Credis_Client|\PHPUnit_Framework_MockObject_MockObject
-	 */
-	private $stubClient;
+    /**
+     * @var Credis_Client|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $stubClient;
 
     public function setUp()
     {
-	    $this->stubClient = $this->getMockBuilder(Credis_Client::class)
-	        ->setMethods(['get', 'set', 'exists', 'mGet', 'mSet'])
-	        ->getMock();
+        $this->stubClient = $this->getMockBuilder(Credis_Client::class)
+            ->setMethods(['get', 'set', 'exists', 'mGet', 'mSet'])
+            ->getMock();
         $this->store = new CredisKeyValueStore($this->stubClient);
     }
 
@@ -33,8 +33,8 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $key = 'key';
         $value = 'value';
 
-	    $this->stubClient->expects($this->once())->method('set');
-	    $this->stubClient->method('get')->willReturn($value);
+        $this->stubClient->expects($this->once())->method('set');
+        $this->stubClient->method('get')->willReturn($value);
 
         $this->store->set($key, $value);
         $this->assertEquals($value, $this->store->get($key));
@@ -47,7 +47,7 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->store->has($key));
 
-	    $this->stubClient->expects($this->once())->method('exists')->willReturn(true);
+        $this->stubClient->expects($this->once())->method('exists')->willReturn(true);
 
         $this->store->set($key, $value);
         $this->assertTrue($this->store->has($key));
@@ -59,21 +59,21 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $this->store->get('not set key');
     }
 
-	public function testMultipleKeysAreSetAndRetrieved()
-	{
+    public function testMultipleKeysAreSetAndRetrieved()
+    {
         $items = ['key1' => 'foo', 'key2' => 'bar'];
         $keys = array_keys($items);
 
-		$this->stubClient->expects($this->once())->method('mSet');
+        $this->stubClient->expects($this->once())->method('mSet');
 
-		$this->store->multiSet($items);
+        $this->store->multiSet($items);
 
-		$this->stubClient->expects($this->once())->method('mGet')->willReturn($items);
+        $this->stubClient->expects($this->once())->method('mGet')->willReturn($items);
 
-		$result = $this->store->multiGet($keys);
+        $result = $this->store->multiGet($keys);
 
-		$this->assertSame($items, $result);
-	}
+        $this->assertSame($items, $result);
+    }
 
     public function testEmptyArrayIsReturnedIfRequestedSnippetKeysArrayIsEmpty()
     {

@@ -13,12 +13,12 @@ class CredisKeyValueStore implements KeyValueStore
      */
     private $client;
 
-	public function __construct(Credis_Client $client)
-	{
-		$this->client = $client;
-	}
+    public function __construct(Credis_Client $client)
+    {
+        $this->client = $client;
+    }
 
-	/**
+    /**
      * @param string $key
      * @return bool|string
      */
@@ -46,30 +46,30 @@ class CredisKeyValueStore implements KeyValueStore
      */
     public function has($key)
     {
-	    return (bool) $this->client->exists($key);
+        return (bool) $this->client->exists($key);
     }
 
-	/**
-	 * @param array $keys
-	 * @return array
-	 */
-	public function multiGet(array $keys)
-	{
-		if (count($keys) === 0) {
+    /**
+     * @param array $keys
+     * @return array
+     */
+    public function multiGet(array $keys)
+    {
+        if (count($keys) === 0) {
             return [];
         }
 
-		$values = $this->client->mGet($keys);
+        $values = $this->client->mGet($keys);
         $items = array_combine($keys, $values);
 
         return array_filter($items);
-	}
+    }
 
-	/**
-	 * @param array $items
-	 */
-	public function multiSet(array $items)
-	{
-		$this->client->mSet($items);
-	}
+    /**
+     * @param array $items
+     */
+    public function multiSet(array $items)
+    {
+        $this->client->mSet($items);
+    }
 }
