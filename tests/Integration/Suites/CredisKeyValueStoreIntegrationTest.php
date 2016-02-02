@@ -53,7 +53,7 @@ class CredisKeyValueStoreIntegrationTest extends \PHPUnit_Framework_TestCase
 
         $this->keyValueStore->multiSet($items);
 
-        array_push($keys, 'key3');
+        $keys[] = 'key3';
         $result = $this->keyValueStore->multiGet($keys);
 
         $this->assertSame($items, $result);
