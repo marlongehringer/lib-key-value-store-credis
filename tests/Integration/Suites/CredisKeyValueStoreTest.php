@@ -1,6 +1,8 @@
 <?php
 
-namespace LizardsAndPumpkins\DataPool\KeyValue\Credis;
+namespace LizardsAndPumpkins;
+
+use LizardsAndPumpkins\DataPool\KeyValue\Credis\CredisKeyValueStore;
 
 class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {
