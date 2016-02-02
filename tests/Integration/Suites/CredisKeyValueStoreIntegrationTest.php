@@ -15,10 +15,6 @@ class CredisKeyValueStoreIntegrationTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        if (!class_exists(\Credis_Client::class)) {
-            $this->markTestSkipped(sprintf('CRedis not available on %s:%s', self::REDIS_HOST, self::REDIS_PORT));
-        }
-
         $client = new \Credis_Client(self::REDIS_HOST, self::REDIS_PORT);
         $client->del('foo');
         $client->del('key1');
