@@ -3,7 +3,7 @@
 namespace LizardsAndPumpkins\DataPool\KeyValue\Credis;
 
 use Credis_Client;
-use LizardsAndPumpkins\KeyValue\KeyNotFoundException;
+use LizardsAndPumpkins\DataPool\KeyValue\Exception\KeyNotFoundException;
 
 /**
  * @covers \LizardsAndPumpkins\DataPool\KeyValue\Credis\CRedisKeyValueStore
