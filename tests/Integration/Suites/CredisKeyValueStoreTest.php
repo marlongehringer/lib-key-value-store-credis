@@ -3,6 +3,7 @@
 namespace LizardsAndPumpkins;
 
 use LizardsAndPumpkins\DataPool\KeyValue\Credis\CredisKeyValueStore;
+use LizardsAndPumpkins\DataPool\KeyValue\Exception\KeyNotFoundException;
 
 class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {
@@ -60,5 +61,11 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
     public function testFalseIsReturnedIfKeyDoesNotExist()
     {
         $this->assertFalse($this->keyValueStore->has('foo'));
+    }
+
+    public function testExceptionIsThrownIfValueIsNotSet()
+    {
+        $this->expectException(KeyNotFoundException::class);
+        $this->assertFalse($this->keyValueStore->get('foo'));
     }
 }
