@@ -18,66 +18,70 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Credis_Client|\PHPUnit_Framework_MockObject_MockObject
      */
-    private $stubClient;
+    private $mockClient;
 
     public function setUp()
     {
-        $this->stubClient = $this->getMockBuilder(Credis_Client::class)
+        $this->mockClient = $this->getMockBuilder(Credis_Client::class)
             ->setMethods(['get', 'set', 'exists', 'mGet', 'mSet'])
             ->getMock();
-        $this->store = new CredisKeyValueStore($this->stubClient);
+        $this->store = new CredisKeyValueStore($this->mockClient);
     }
 
-    public function testValueIsSetAndRetrieved()
+    public function testSettingValueIsDelegatedToClient()
     {
         $key = 'key';
         $value = 'value';
 
-        $this->stubClient->expects($this->once())->method('set');
-        $this->stubClient->method('get')->willReturn($value);
-
+        $this->mockClient->expects($this->once())->method('set')->with($key, $value);
         $this->store->set($key, $value);
-        $this->assertEquals($value, $this->store->get($key));
     }
 
-    public function testTrueIsReturnedOnlyAfterValueIsSet()
-    {
-        $key = 'key';
-        $value = 'value';
-
-        $this->assertFalse($this->store->has($key));
-
-        $this->stubClient->expects($this->once())->method('exists')->willReturn(true);
-
-        $this->store->set($key, $value);
-        $this->assertTrue($this->store->has($key));
-    }
-
-    public function testExceptionIsThrownIfValueIsNotSet()
+    public function testExceptionIsThrownDuringAttemptToGetAValueWhichIsNotSet()
     {
         $this->expectException(KeyNotFoundException::class);
-        $this->stubClient->method('get')->willReturn(false);
+        $this->mockClient->method('get')->willReturn(false);
         $this->store->get('not set key');
     }
 
-    public function testMultipleKeysAreSetAndRetrieved()
+    public function testGettingValueIsDelegatedToClient()
+    {
+        $key = 'key';
+        $value = 'value';
+
+        $this->mockClient->method('get')->with($key)->willReturn($value);
+
+        $this->assertEquals($value, $this->store->get($key));
+    }
+
+    public function testCheckingKeyExistenceIsDelegatedToClient()
+    {
+        $key = 'key';
+        $this->mockClient->method('exists')->with($key)->willReturn(true);
+
+        $this->assertTrue($this->store->has($key));
+    }
+
+    public function testSettingMultipleKeysIsDelegatedToClient()
     {
         $items = ['key1' => 'foo', 'key2' => 'bar'];
-        $keys = array_keys($items);
 
-        $this->stubClient->expects($this->once())->method('mSet');
-
+        $this->mockClient->expects($this->once())->method('mSet')->with($items);
         $this->store->multiSet($items);
-
-        $this->stubClient->expects($this->once())->method('mGet')->willReturn($items);
-
-        $result = $this->store->multiGet($keys);
-
-        $this->assertSame($items, $result);
     }
 
     public function testEmptyArrayIsReturnedIfRequestedSnippetKeysArrayIsEmpty()
     {
         $this->assertSame([], $this->store->multiGet([]));
+    }
+
+    public function testGettingMultipleKeysIsDelegatedToClient()
+    {
+        $items = ['key1' => 'foo', 'key2' => 'bar'];
+        $keys = array_keys($items);
+
+        $this->mockClient->expects($this->once())->method('mGet')->with($keys)->willReturn($items);
+
+        $this->assertSame($items, $this->store->multiGet($keys));
     }
 }
