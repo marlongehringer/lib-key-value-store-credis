@@ -66,6 +66,6 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
     public function testExceptionIsThrownIfValueIsNotSet()
     {
         $this->expectException(KeyNotFoundException::class);
-        $this->assertFalse($this->keyValueStore->get('foo'));
+        $this->assertFalse($this->keyValueStore->get('not-set-value'));
     }
 }
