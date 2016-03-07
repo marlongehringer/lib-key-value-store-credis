@@ -20,11 +20,13 @@ class CredisKeyValueStore implements KeyValueStore
 
     /**
      * @param string $key
-     * @return bool|string
+     * @return string
      */
     public function get($key)
     {
-        if (!$value = $this->client->get($key)) {
+        $value = $this->client->get($key);
+
+        if (false === $value) {
             throw new KeyNotFoundException(sprintf('Key not found "%s"', $key));
         }
 
