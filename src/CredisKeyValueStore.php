@@ -2,9 +2,9 @@
 
 namespace LizardsAndPumpkins\DataPool\KeyValue\Credis;
 
-use LizardsAndPumpkins\DataPool\KeyValue\Exception\KeyNotFoundException;
-use LizardsAndPumpkins\DataPool\KeyValue\KeyValueStore;
 use Credis_Client;
+use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyNotFoundException;
+use LizardsAndPumpkins\DataPool\KeyValueStore\KeyValueStore;
 
 class CredisKeyValueStore implements KeyValueStore
 {
