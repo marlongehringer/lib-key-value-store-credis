@@ -3,7 +3,7 @@
 namespace LizardsAndPumpkins;
 
 use LizardsAndPumpkins\DataPool\KeyValue\Credis\CredisKeyValueStore;
-use LizardsAndPumpkins\DataPool\KeyValue\Exception\KeyNotFoundException;
+use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyNotFoundException;
 
 class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {
