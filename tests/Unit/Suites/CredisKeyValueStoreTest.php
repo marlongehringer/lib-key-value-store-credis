@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LizardsAndPumpkins\DataPool\KeyValue\Credis;
 
 use Credis_Client;
@@ -72,7 +74,7 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
     public function testEmptyArrayIsReturnedIfRequestedSnippetKeysArrayIsEmpty()
     {
-        $this->assertSame([], $this->store->multiGet([]));
+        $this->assertSame([], $this->store->multiGet());
     }
 
     public function testGettingMultipleKeysIsDelegatedToClient()
@@ -82,6 +84,6 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
         $this->mockClient->expects($this->once())->method('mGet')->with($keys)->willReturn($items);
 
-        $this->assertSame($items, $this->store->multiGet($keys));
+        $this->assertSame($items, $this->store->multiGet(...$keys));
     }
 }
