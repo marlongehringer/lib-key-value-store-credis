@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LizardsAndPumpkins\DataPool\KeyValue\Credis;
 
 use Credis_Client;
@@ -18,11 +20,7 @@ class CredisKeyValueStore implements KeyValueStore
         $this->client = $client;
     }
 
-    /**
-     * @param string $key
-     * @return string
-     */
-    public function get($key)
+    public function get(string $key) : string
     {
         $value = $this->client->get($key);
 
@@ -35,27 +33,23 @@ class CredisKeyValueStore implements KeyValueStore
 
     /**
      * @param string $key
-     * @param string $value
+     * @param mixed $value
      */
-    public function set($key, $value)
+    public function set(string $key, $value)
     {
         $this->client->set($key, $value);
     }
 
-    /**
-     * @param string $key
-     * @return bool
-     */
-    public function has($key)
+    public function has(string $key) : bool
     {
         return (bool) $this->client->exists($key);
     }
 
     /**
      * @param string[] $keys
-     * @return string[]
+     * @return mixed[]
      */
-    public function multiGet(array $keys)
+    public function multiGet(string ...$keys) : array
     {
         if (count($keys) === 0) {
             return [];
@@ -68,7 +62,7 @@ class CredisKeyValueStore implements KeyValueStore
     }
 
     /**
-     * @param string[] $items
+     * @param mixed[] $items
      */
     public function multiSet(array $items)
     {

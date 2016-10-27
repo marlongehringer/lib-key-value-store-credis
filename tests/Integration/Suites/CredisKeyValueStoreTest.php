@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LizardsAndPumpkins;
 
 use LizardsAndPumpkins\DataPool\KeyValue\Credis\CredisKeyValueStore;
@@ -40,7 +42,7 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $keys = array_keys($items);
 
         $this->keyValueStore->multiSet($items);
-        $result = $this->keyValueStore->multiGet($keys);
+        $result = $this->keyValueStore->multiGet(...$keys);
 
         $this->assertSame($items, $result);
     }
@@ -53,7 +55,7 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $this->keyValueStore->multiSet($items);
 
         $keys[] = 'key3';
-        $result = $this->keyValueStore->multiGet($keys);
+        $result = $this->keyValueStore->multiGet(...$keys);
 
         $this->assertSame($items, $result);
     }
