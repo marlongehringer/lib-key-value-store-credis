@@ -74,7 +74,7 @@ class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
     public function testEmptyArrayIsReturnedIfRequestedSnippetKeysArrayIsEmpty()
     {
-        $this->assertSame([], $this->store->multiGet());
+        $this->assertSame([], $this->store->multiGet(...[]));
     }
 
     public function testGettingMultipleKeysIsDelegatedToClient()
