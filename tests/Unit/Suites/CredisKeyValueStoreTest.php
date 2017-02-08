@@ -6,11 +6,12 @@ namespace LizardsAndPumpkins\DataPool\KeyValue\Credis;
 
 use Credis_Client;
 use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyNotFoundException;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \LizardsAndPumpkins\DataPool\KeyValue\Credis\CRedisKeyValueStore
  */
-class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
+class CredisKeyValueStoreTest extends TestCase
 {
     /**
      * @var CredisKeyValueStore
