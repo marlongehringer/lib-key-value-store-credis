@@ -6,8 +6,9 @@ namespace LizardsAndPumpkins;
 
 use LizardsAndPumpkins\DataPool\KeyValue\Credis\CredisKeyValueStore;
 use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyNotFoundException;
+use PHPUnit\Framework\TestCase;
 
-class CredisKeyValueStoreTest extends \PHPUnit_Framework_TestCase
+class CredisKeyValueStoreTest extends TestCase
 {
     const REDIS_HOST = 'localhost';
 
